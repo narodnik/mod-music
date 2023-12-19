@@ -27,9 +27,9 @@ for item in soup.find_all("item"):
     href = href.removeprefix('href="')
     href = href.rstrip('"')
     filename = href.split("#")[-1]
-    req = requests.get(href, allow_redirects=True)
     fullpath = f"{shortdate}/{filename}"
     if not os.path.exists(fullpath):
+        req = requests.get(href, allow_redirects=True)
         print(f"Downloading {filename} to {shortdate}")
         open(fullpath, "wb").write(req.content)
     else:
